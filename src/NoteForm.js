@@ -31,15 +31,23 @@ class NoteForm extends Component {
 
   buttonPressed() {
 
-    if (this.state.title && this.state.text && this.state.tags) {
+    if (this.state.title && this.state.description && this.state.tags) {
 
       this.props.onPressed();
+      this.clearInputs();
     } else {
 
       console.log("Note not saved because is not filled correctly");
     }
-
   }
+
+   clearInputs() {
+
+      this.setState({title: ""});
+      this.setState({description: ""});
+      this.setState({tags: ""});
+    }
+
 }
 
 export default NoteForm;
