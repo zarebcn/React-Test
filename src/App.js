@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       count: 0,
-      text: "valor inicial"
+      text: "valor inicial",
+      note: this.createEmptyNote()
     }
   }
 
@@ -40,18 +41,39 @@ class App extends Component {
               onPressed={() => this.buttonPressed()} />
         </p>
         <p>
-            <NoteForm onPressed={() => this.saveNote()} />
+            <NoteForm onPressed={(data) => this.saveNote(data)} />
         </p>
       </div>
     );
+  }
+
+  createEmptyNote() {
+
+     let nota = {
+        title: "",
+        description: "",
+        tags: ""
+      }
+
+    return nota;
   }
 
   buttonPressed() {
     this.setState({ count: this.state.count + 1 })
   }
 
-  saveNote() {
+  saveNote(data) {
+
+    console.log(data);
     console.log("Note saved");
+
+    let note = this.state.note;
+    note.title = data.title;
+    note.description = data.description;
+    note.tags = data.tags;
+
+    this.setState({note});
+    console.log(this.state.note);
   }
 }
 
