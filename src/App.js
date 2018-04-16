@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Form from './Form';
+import NoteForm from './NoteForm';
 
 class App extends Component {
 
@@ -38,12 +39,19 @@ class App extends Component {
             <Form title="age" button="enter"
               onPressed={() => this.buttonPressed()} />
         </p>
+        <p>
+            <NoteForm onPressed={() => this.saveNote()} />
+        </p>
       </div>
     );
   }
 
   buttonPressed() {
     this.setState({ count: this.state.count + 1 })
+  }
+
+  saveNote() {
+    console.log("Note saved");
   }
 }
 
