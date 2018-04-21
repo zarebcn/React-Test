@@ -41,7 +41,7 @@ class App extends Component {
               onPressed={() => this.buttonPressed()} />
         </p>
         <p>
-            <NoteForm onPressed={(data) => this.saveNote(data)} />
+            <NoteForm onPressed={(note) => this.saveNote(note)} />
         </p>
       </div>
     );
@@ -62,18 +62,13 @@ class App extends Component {
     this.setState({ count: this.state.count + 1 })
   }
 
-  saveNote(data) {
+  saveNote(note) {
 
-    console.log(data);
+    console.log(note);
     console.log("Note saved");
 
-    let note = this.state.note;
-    note.title = data.title;
-    note.description = data.description;
-    note.tags = data.tags;
-
-    this.setState({note});
-    console.log(this.state.note);
+    this.setState({note: note});
+    setTimeout(() =>console.log(this.state.note), 1000);
   }
 }
 

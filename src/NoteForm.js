@@ -56,12 +56,6 @@ class NoteForm extends Component {
 
     if (this.state.note.title && this.state.note.description && this.state.note.tags) {
 
-      /*let note = {
-        title: this.state.title,
-        description: this.state.description,
-        tags: this.state.tags
-      }*/
-
       let note = this.state.note;
 
       this.setState({error: ""});
