@@ -34,14 +34,17 @@ class App extends Component {
           Count: {this.state.count}
         </p>
         <p>
-            <Form title="name" button="ok"
-              onPressed={() => this.buttonPressed()} />
+          <Form title="name" button="ok"
+            onPressed={() => this.buttonPressed()} />
 
-            <Form title="age" button="enter"
-              onPressed={() => this.buttonPressed()} />
+          <Form title="age" button="enter"
+            onPressed={() => this.buttonPressed()} />
         </p>
         <p>
-            <NoteForm onPressed={(note) => this.saveNote(note)} />
+          <NoteForm onPressed={(note) => this.saveNote(note)} />
+        </p>
+        <p>
+          {this.renderNote(this.state.note)}
         </p>
       </div>
     );
@@ -70,6 +73,28 @@ class App extends Component {
     this.setState({note: note}, () => console.log(this.state.note));
     /*setTimeout(() =>console.log(this.state.note), 1000);*/
   }
+
+  renderNote(note) {
+
+    return (
+      <div>
+        &nbsp;
+        <div>
+          Title:  {note.title}
+        </div>
+        &nbsp;
+        <div>
+          Description:  {note.description}
+        </div>
+        &nbsp;
+        <div>
+          Tags:  {note.tags}
+        </div>
+      </div>
+
+    );
+  }
+
 }
 
 export default App;
