@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       count: 0,
       text: "valor inicial",
-      note: this.createEmptyNote()
+      note: this.createEmptyNote(),
+      notes: []
     }
   }
 
@@ -44,7 +45,7 @@ class App extends Component {
           <NoteForm onPressed={(note) => this.saveNote(note)} />
         </p>
         <p>
-          {this.renderNote(this.state.note)}
+          {this.state.notes.map(note => this.renderNote(note))}
         </p>
       </div>
     );
@@ -71,6 +72,10 @@ class App extends Component {
     console.log("Note saved");
 
     this.setState({note: note}, () => console.log(this.state.note));
+
+    let notes = this.state.notes;
+    notes.push(note);
+    this.setState({notes: notes}, () => console.log(this.state.notes));
     /*setTimeout(() =>console.log(this.state.note), 1000);*/
   }
 
@@ -90,8 +95,8 @@ class App extends Component {
         <div>
           Tags:  {note.tags}
         </div>
+        &nbsp;
       </div>
-
     );
   }
 
