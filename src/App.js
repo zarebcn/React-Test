@@ -67,8 +67,8 @@ class App extends Component {
     console.log(note);
     console.log("Note saved");
 
-    this.setState({note: note});
-    setTimeout(() =>console.log(this.state.note), 1000);
+    this.setState({note: note}, () => console.log(this.state.note));
+    /*setTimeout(() =>console.log(this.state.note), 1000);*/
   }
 }
 
