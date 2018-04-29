@@ -13,29 +13,28 @@ class NoteForm extends Component {
   render() {
     return (
       <div>
-        <p>
+        <div>
           <p>{this.state.error}</p>
           <input placeholder="input title..." value={this.state.note.title} onChange={(event) => {
               let note = this.state.note;
               note.title = event.target.value;
               this.setState({note});
             }} />
-        </p>
-        <p>
+        </div>
+        <div>
           <input placeholder="input description..." value={this.state.note.description} onChange={(event) => {
               let note = this.state.note;
               note.description = event.target.value;
               this.setState({note});
             }} />
-        </p>
-        <p>
+        </div>
+        <div>
           <input placeholder="input tags..." value={this.state.note.tags} onChange={(event) => {
              let note = this.state.note;
               note.tags = event.target.value;
               this.setState({note});
             }} />
-        </p>
-        &nbsp;
+        </div>
         <button onClick={() => this.buttonPressed()}>SAVE</button>
       </div>
     );

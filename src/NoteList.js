@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 class NoteList extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="note-list">
@@ -17,7 +13,7 @@ class NoteList extends Component {
   renderNote(note) {
 
     return (
-      <div className="note-view">
+      <div className="note-view" key={note.id}>
         <div>
           Title:  {note.title}
         </div>
