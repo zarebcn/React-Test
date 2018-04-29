@@ -21,26 +21,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          <input value={this.state.text} onChange={(event) => this.setState({text: event.target.value})} />
-        </p>
-        <p>
-          Count: {this.state.count}
-        </p>
-        <p>
-          <Form title="name" button="ok"
-            onPressed={() => this.buttonPressed()} />
-
-          <Form title="age" button="enter"
-            onPressed={() => this.buttonPressed()} />
-        </p>
         <p>
           <NoteForm onPressed={(note) => this.saveNote(note)} />
         </p>
@@ -82,20 +62,16 @@ class App extends Component {
   renderNote(note) {
 
     return (
-      <div>
-        &nbsp;
+      <div className="note-view">
         <div>
           Title:  {note.title}
         </div>
-        &nbsp;
         <div>
           Description:  {note.description}
         </div>
-        &nbsp;
         <div>
           Tags:  {note.tags}
         </div>
-        &nbsp;
       </div>
     );
   }
