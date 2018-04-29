@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
 import Form from './Form';
 import NoteForm from './NoteForm';
+import NoteList from './NoteList';
 
 class App extends Component {
 
@@ -21,12 +23,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>
+        <div>
           <NoteForm onPressed={(note) => this.saveNote(note)} />
-        </p>
-        <p>
-          {this.state.notes.map(note => this.renderNote(note))}
-        </p>
+        </div>
+        <NoteList notes={this.state.notes} />
       </div>
     );
   }
@@ -59,22 +59,6 @@ class App extends Component {
     /*setTimeout(() =>console.log(this.state.note), 1000);*/
   }
 
-  renderNote(note) {
-
-    return (
-      <div className="note-view">
-        <div>
-          Title:  {note.title}
-        </div>
-        <div>
-          Description:  {note.description}
-        </div>
-        <div>
-          Tags:  {note.tags}
-        </div>
-      </div>
-    );
-  }
 
 }
 
