@@ -6,7 +6,7 @@ class NoteForm extends Component {
     super(props);
     this.state = {
       error: "",
-      note: this.createEmptyNote()
+      note: this.createEmptyNote() // TODO: a veces te pasarán la nota a editar
     }
   }
 

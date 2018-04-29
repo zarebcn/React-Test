@@ -62,6 +62,8 @@ class App extends Component {
     let note = this.state.notes.filter(x => x.id==noteId)[0];
     console.log(note);
 
+    // TODO: añadir botón para editar nota, irás a /edit/:id
+    // Puedes reusar el componente NoteForm, pero tendrás que modificarlo para que acepte recibir una nota 
     return (
       <div>
         <NoteView note={note}/>
@@ -89,9 +91,12 @@ class App extends Component {
 
     let notes = this.state.notes;
 
+    // TODO: si la nota viene con id, no añadir una nueva sino actualizar la existente
     note.id = this.state.nextId;
-
     notes.push(note);
+
+    // for i... y susituir el i encontrado notes[i]
+
     this.setState({notes: notes, nextId: this.state.nextId + 1}, () => console.log(this.state.notes));
     /*setTimeout(() =>console.log(this.state.note), 1000);*/
   }
