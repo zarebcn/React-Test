@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import NoteForm from './NoteForm';
 import NoteList from './NoteList';
+import NoteView from './NoteView';
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/' render={(routerProps) => this.renderList(routerProps)} />
               <Route exact path='/new' render={(routerProps) => this.renderForm(routerProps)} />
+              <Route exact path='/view/:id' render={(routerProps) => this.renderNote(routerProps)} />
             </Switch>
           </div>
         </BrowserRouter>
@@ -53,6 +55,20 @@ class App extends Component {
     );
   }
 
+  renderNote(routerProps) {
+
+    const noteId = routerProps.match.params.id;
+
+    let note = this.state.notes.filter(x => x.id==noteId)[0];
+    console.log(note);
+
+    return (
+      <div>
+        <NoteView note={note}/>
+      </div>
+    );
+  }
+
   createEmptyNote() {
 
      let nota = {
@@ -62,10 +78,6 @@ class App extends Component {
       }
 
     return nota;
-  }
-
-  buttonPressed() {
-    this.setState({ count: this.state.count + 1 })
   }
 
   saveNote(note) {

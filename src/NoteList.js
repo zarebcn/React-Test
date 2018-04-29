@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class NoteList extends Component {
 
@@ -15,13 +16,7 @@ class NoteList extends Component {
     return (
       <div className="note-view" key={note.id}>
         <div>
-          Title:  {note.title}
-        </div>
-        <div>
-          Description:  {note.description}
-        </div>
-        <div>
-          Tags:  {note.tags}
+          <Link to={"/view/" + note.id}>{note.title}</Link>
         </div>
       </div>
     );
