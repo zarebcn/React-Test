@@ -49,22 +49,13 @@ class App extends Component {
   renderForm(routerProps) {
 
     const id = routerProps.match.params.id;
-    let notes = this.state.notes;
-    let note = this.createEmptyNote();
-
-    for (let i = 0; i < notes.length; i++) {
-
-      if (notes[i].id == id) {
-
-        note = notes[i];
-      }
-    }
+    let note = this.state.notes.filter(x => x.id == id)[0];
 
     return (
       <div className="home-button">
         <button onClick={() => routerProps.history.push("/")}>HOME</button>
         {/* <Link to={"/"}>Home</Link> */}
-        <NoteForm onPressed={(note) => this.saveNote(note, routerProps)} note={note} noteId={routerProps.match.params.id} />
+        <NoteForm onPressed={(note) => this.saveNote(note, routerProps)} note={note} />
       </div>
     );
   }

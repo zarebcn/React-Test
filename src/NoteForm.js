@@ -45,6 +45,7 @@ class NoteForm extends Component {
   getNote() {
 
     let note = this.props.note;
+    console.log(note);
 
     if (note) {
       return note;
