@@ -44,25 +44,11 @@ class NoteForm extends Component {
 
   getNote() {
 
-    const id = this.props.noteId;
-    let notes = this.props.notes;
-    let note = this.createEmptyNote();
-    console.log(id);
+    let note = this.props.note;
 
-    for (let i = 0; i < notes.length; i++) {
-
-      if (notes[i].id == id) {
-
-        note = notes[i];
-      }
-    }
-
-    if (id) {
-
+    if (note) {
       return note;
-
     } else {
-
       return this.createEmptyNote();
     }
   }

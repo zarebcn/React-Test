@@ -39,7 +39,7 @@ class App extends Component {
   renderList(routerProps) {
     return (
       <div>
-        <button onClick={() => routerProps.history.push("/new")}>Nueva nota</button>
+        <button onClick={() => routerProps.history.push("/new")}>NEW NOTE</button>
         {/* <Link to={"/new"}>Nueva nota</Link> */}
         <NoteList notes={this.state.notes} />
       </div>
@@ -47,11 +47,24 @@ class App extends Component {
   }
 
   renderForm(routerProps) {
+
+    const id = routerProps.match.params.id;
+    let notes = this.state.notes;
+    let note = this.createEmptyNote();
+
+    for (let i = 0; i < notes.length; i++) {
+
+      if (notes[i].id == id) {
+
+        note = notes[i];
+      }
+    }
+
     return (
       <div className="home-button">
-        <button onClick={() => routerProps.history.push("/")}>Home</button>
+        <button onClick={() => routerProps.history.push("/")}>HOME</button>
         {/* <Link to={"/"}>Home</Link> */}
-        <NoteForm onPressed={(note) => this.saveNote(note, routerProps)} notes={this.state.notes} noteId={routerProps.match.params.id} />
+        <NoteForm onPressed={(note) => this.saveNote(note, routerProps)} note={note} noteId={routerProps.match.params.id} />
       </div>
     );
   }
@@ -65,12 +78,12 @@ class App extends Component {
 
     return (
       <div>
-        <button onClick={() => routerProps.history.push("/")}>Home</button>
+        <button onClick={() => routerProps.history.push("/")}>HOME</button>
         <NoteView note={note}/>
-        <button onClick={() => routerProps.history.push("/edit/" + note.id)}>Edit</button> <button onClick={() => {
+        <button onClick={() => routerProps.history.push("/edit/" + note.id)}>EDIT</button> <button onClick={() => {
             this.deleteNote(note);
             routerProps.history.push("/");
-          }}>Delete</button>
+          }}>DELETE</button>
       </div>
     );
   }
@@ -122,6 +135,7 @@ class App extends Component {
 
       notes.push(nota);
       this.setState({notes: notes, nextId: this.state.nextId + 1}, () => console.log(this.state.notes));
+
     } else {
 
       for (let i = 0; i < notes.length; i++) {
