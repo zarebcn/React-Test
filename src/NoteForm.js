@@ -12,8 +12,8 @@ class NoteForm extends Component {
 
   render() {
     return (
-      <div>
-        <div className="note-form">
+      <div className="note-form">
+        <div className="text-place">
           <div>
             <p>{this.state.error}</p>
             <input placeholder="input title..." value={this.state.note.title} onChange={(event) => {
@@ -23,7 +23,7 @@ class NoteForm extends Component {
             }} />
           </div>
           <div>
-            <input placeholder="input description..." value={this.state.note.description} onChange={(event) => {
+            <textarea placeholder="input description..." value={this.state.note.description} onChange={(event) => {
               let note = this.state.note;
               note.description = event.target.value;
               this.setState({note});

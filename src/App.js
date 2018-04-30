@@ -48,7 +48,7 @@ class App extends Component {
 
   renderForm(routerProps) {
     return (
-      <div>
+      <div className="home-button">
         <button onClick={() => routerProps.history.push("/")}>Home</button>
         {/* <Link to={"/"}>Home</Link> */}
         <NoteForm onPressed={(note) => this.saveNote(note, routerProps)} notes={this.state.notes} noteId={routerProps.match.params.id} />
