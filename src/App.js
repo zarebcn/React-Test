@@ -11,9 +11,6 @@ class App extends Component {
 
     super(props);
     this.state = {
-      count: 0,
-      text: "valor inicial",
-      note: this.createEmptyNote(),
       nextId: 2,
       notes: [ {id:1, title:"dummy", description:"initial note as example", tags:""} ]
     }
@@ -95,23 +92,10 @@ class App extends Component {
     this.setState({notes: notes});
   }
 
-  createEmptyNote() {
-
-     let nota = {
-        title: "",
-        description: "",
-        tags: ""
-      }
-
-    return nota;
-  }
-
   saveNote(note, routerProps) {
 
     console.log(note);
     console.log("Note saved");
-
-    this.setState({note: note}, () => console.log(this.state.note));
 
     let notes = this.state.notes;
 
