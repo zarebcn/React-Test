@@ -6,47 +6,74 @@ class NoteForm extends Component {
     super(props);
     this.state = {
       error: "",
-      note: this.createEmptyNote() // TODO: a veces te pasarán la nota a editar
+      note: this.getNote()
     }
   }
 
   render() {
     return (
       <div>
-        <div>
-          <p>{this.state.error}</p>
-          <input placeholder="input title..." value={this.state.note.title} onChange={(event) => {
+        <div className="note-form">
+          <div>
+            <p>{this.state.error}</p>
+            <input placeholder="input title..." value={this.state.note.title} onChange={(event) => {
               let note = this.state.note;
               note.title = event.target.value;
               this.setState({note});
             }} />
-        </div>
-        <div>
-          <input placeholder="input description..." value={this.state.note.description} onChange={(event) => {
+          </div>
+          <div>
+            <input placeholder="input description..." value={this.state.note.description} onChange={(event) => {
               let note = this.state.note;
               note.description = event.target.value;
               this.setState({note});
             }} />
-        </div>
-        <div>
-          <input placeholder="input tags..." value={this.state.note.tags} onChange={(event) => {
+          </div>
+          <div>
+            <input placeholder="input tags..." value={this.state.note.tags} onChange={(event) => {
              let note = this.state.note;
               note.tags = event.target.value;
               this.setState({note});
             }} />
+          </div>
         </div>
         <button onClick={() => this.buttonPressed()}>SAVE</button>
       </div>
     );
   }
 
+  getNote() {
+
+    const id = this.props.noteId;
+    let notes = this.props.notes;
+    let note = this.createEmptyNote();
+    console.log(id);
+
+    for (let i = 0; i < notes.length; i++) {
+
+      if (notes[i].id == id) {
+
+        note = notes[i];
+      }
+    }
+
+    if (id) {
+
+      return note;
+
+    } else {
+
+      return this.createEmptyNote();
+    }
+  }
+
   createEmptyNote() {
 
-     let nota = {
-        title: "",
-        description: "",
-        tags: ""
-      }
+    let nota = {
+      title: "",
+      description: "",
+      tags: ""
+    }
 
     return nota;
   }
@@ -67,16 +94,16 @@ class NoteForm extends Component {
     }
   }
 
-   clearInputs() {
+  clearInputs() {
 
-      let nota = {
-        title: "",
-        description: "",
-        tags: ""
-      }
-
-      this.setState({note: nota});
+    let nota = {
+      title: "",
+      description: "",
+      tags: ""
     }
+
+    this.setState({note: nota});
+  }
 }
 
 export default NoteForm;

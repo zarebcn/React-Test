@@ -28,6 +28,7 @@ class App extends Component {
               <Route exact path='/' render={(routerProps) => this.renderList(routerProps)} />
               <Route exact path='/new' render={(routerProps) => this.renderForm(routerProps)} />
               <Route exact path='/view/:id' render={(routerProps) => this.renderNote(routerProps)} />
+              <Route exact path='/edit/:id' render={(routerProps) => this.renderForm(routerProps)} />
             </Switch>
           </div>
         </BrowserRouter>
@@ -50,7 +51,7 @@ class App extends Component {
       <div>
         <button onClick={() => routerProps.history.push("/")}>Home</button>
         {/* <Link to={"/"}>Home</Link> */}
-        <NoteForm onPressed={(note) => this.saveNote(note)} />
+        <NoteForm onPressed={(note) => this.saveNote(note, routerProps)} notes={this.state.notes} noteId={routerProps.match.params.id} />
       </div>
     );
   }
@@ -59,16 +60,35 @@ class App extends Component {
 
     const noteId = routerProps.match.params.id;
 
-    let note = this.state.notes.filter(x => x.id==noteId)[0];
+    let note = this.state.notes.filter(x => x.id == noteId)[0];
     console.log(note);
 
-    // TODO: añadir botón para editar nota, irás a /edit/:id
-    // Puedes reusar el componente NoteForm, pero tendrás que modificarlo para que acepte recibir una nota 
     return (
       <div>
+        <button onClick={() => routerProps.history.push("/")}>Home</button>
         <NoteView note={note}/>
+        <button onClick={() => routerProps.history.push("/edit/" + note.id)}>Edit</button> <button onClick={() => {
+            this.deleteNote(note);
+            routerProps.history.push("/");
+          }}>Delete</button>
       </div>
     );
+  }
+
+  deleteNote(note) {
+
+    let noteId = note.id;
+    let notes = this.state.notes;
+
+    for (let i = 0; i < notes.length; i++) {
+
+      if (notes[i].id == noteId) {
+
+        notes.splice(i, 1);
+      }
+    }
+
+    this.setState({notes: notes});
   }
 
   createEmptyNote() {
@@ -82,7 +102,7 @@ class App extends Component {
     return nota;
   }
 
-  saveNote(note) {
+  saveNote(note, routerProps) {
 
     console.log(note);
     console.log("Note saved");
@@ -91,14 +111,30 @@ class App extends Component {
 
     let notes = this.state.notes;
 
-    // TODO: si la nota viene con id, no añadir una nueva sino actualizar la existente
-    note.id = this.state.nextId;
-    notes.push(note);
+    if (note.id == null) {
 
-    // for i... y susituir el i encontrado notes[i]
+      let nota = {
+        id: this.state.nextId,
+        title: note.title,
+        description: note.description,
+        tags: note.tags
+      }
 
-    this.setState({notes: notes, nextId: this.state.nextId + 1}, () => console.log(this.state.notes));
-    /*setTimeout(() =>console.log(this.state.note), 1000);*/
+      notes.push(nota);
+      this.setState({notes: notes, nextId: this.state.nextId + 1}, () => console.log(this.state.notes));
+    } else {
+
+      for (let i = 0; i < notes.length; i++) {
+
+        if (notes[i].id == note.id) {
+
+          notes[i] = note;
+          this.setState({notes: notes});
+        }
+      }
+    }
+
+    routerProps.history.push("/");
   }
 
 
