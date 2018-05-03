@@ -4,6 +4,7 @@ import './App.css';
 import NoteForm from './NoteForm';
 import NoteList from './NoteList';
 import NoteView from './NoteView';
+import './Util.js';
 
 class App extends Component {
 
@@ -82,25 +83,16 @@ class App extends Component {
   // borra la nota seleccionada
   deleteNote(note) {
 
-    let noteId = note.id;
     let notes = this.state.notes;
-
-    for (let i = 0; i < notes.length; i++) {
-
-      if (notes[i].id == noteId) {
-
-        notes.splice(i, 1);
-      }
-    }
-
-    this.setState({notes: notes});
+    let index = notes.withIndex().filter(o => o.elem.id == note.id)[0].idx;
+    notes.splice(index, 1);
+    this.setState({notes: notes}, () => console.log("Note deleted"));
   }
 
   // guarda una nota nueva si no tiene ID y si esta tiene ID, actualiza la nota con los datos editados
   saveNote(note, routerProps) {
 
     console.log(note);
-    console.log("Note saved");
 
     let notes = this.state.notes;
 
@@ -114,18 +106,14 @@ class App extends Component {
       }
 
       notes.push(nota);
+      console.log("Note saved");
       this.setState({notes: notes, nextId: this.state.nextId + 1}, () => console.log(this.state.notes));
 
     } else {
 
-      for (let i = 0; i < notes.length; i++) {
-
-        if (notes[i].id == note.id) {
-
-          notes[i] = note;
-          this.setState({notes: notes});
-        }
-      }
+      let index = notes.withIndex().filter(o => o.elem.id == note.id)[0].idx;
+      notes[index] = note;
+      this.setState({notes: notes}, () => console.log("Note edited"));
     }
 
     routerProps.history.push("/");
