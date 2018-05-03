@@ -42,6 +42,7 @@ class NoteForm extends Component {
     );
   }
 
+  // muestra en el form la nota a editar si se le ha enviado la nota o en caso contrario crea una nota vacia
   getNote() {
 
     let note = this.props.note;
@@ -54,6 +55,7 @@ class NoteForm extends Component {
     }
   }
 
+  // crea una nota vacia
   createEmptyNote() {
 
     let nota = {
@@ -65,6 +67,7 @@ class NoteForm extends Component {
     return nota;
   }
 
+  // al apretar el boton save y si los inputs estan correctamente rellenados, envia la nota creada a App.js mediante los props onPressed, en caso de que los input no esten bien rellenados muestra un mensaje de error
   buttonPressed() {
 
     if (this.state.note.title && this.state.note.description && this.state.note.tags) {
@@ -81,6 +84,7 @@ class NoteForm extends Component {
     }
   }
 
+  // borra los valores de los input y los devuelve a su estado inicial
   clearInputs() {
 
     let nota = {

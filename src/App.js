@@ -33,6 +33,7 @@ class App extends Component {
     );
   }
 
+  // muestra en pantalla la lista de notas
   renderList(routerProps) {
     return (
       <div>
@@ -43,6 +44,7 @@ class App extends Component {
     );
   }
 
+  // muestra en pantalla el formulario para crear una nota o editarla
   renderForm(routerProps) {
 
     const id = routerProps.match.params.id;
@@ -57,6 +59,7 @@ class App extends Component {
     );
   }
 
+  // muestra la nota seleccionada con todo su contenido
   renderNote(routerProps) {
 
     const noteId = routerProps.match.params.id;
@@ -76,6 +79,7 @@ class App extends Component {
     );
   }
 
+  // borra la nota seleccionada
   deleteNote(note) {
 
     let noteId = note.id;
@@ -92,6 +96,7 @@ class App extends Component {
     this.setState({notes: notes});
   }
 
+  // guarda una nota nueva si no tiene ID y si esta tiene ID, actualiza la nota con los datos editados
   saveNote(note, routerProps) {
 
     console.log(note);

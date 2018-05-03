@@ -11,6 +11,7 @@ class NoteList extends Component {
     );
   }
 
+  // muetra cada nota de la lista como un link que redirige a la vista de nota
   renderNote(note) {
 
     return (

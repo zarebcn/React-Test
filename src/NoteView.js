@@ -10,6 +10,7 @@ class NoteView extends Component {
     );
   }
 
+  // muestra en pantalla la nota con todo su contenido
   renderNote(note) {
 
     return (
