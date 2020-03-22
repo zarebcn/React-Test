@@ -13,7 +13,7 @@ class App extends Component {
     super(props);
     this.state = {
       nextId: 2,
-      notes: [ {id:1, title:"dummy", description:"initial note as example", tags:""} ]
+      notes: [ {id:1, title:"dummy", description:"sample note", tags:""} ]
     }
   }
 
